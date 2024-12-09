@@ -5,7 +5,6 @@
       <module fileurl="file://$PROJECT_DIR$/sky-take-out/sky-common/sky-common.iml" filepath="$PROJECT_DIR$/sky-take-out/sky-common/sky-common.iml" />
       <module fileurl="file://$PROJECT_DIR$/sky-take-out/sky-pojo/sky-pojo.iml" filepath="$PROJECT_DIR$/sky-take-out/sky-pojo/sky-pojo.iml" />
       <module fileurl="file://$PROJECT_DIR$/sky-take-out/sky-server/sky-server.iml" filepath="$PROJECT_DIR$/sky-take-out/sky-server/sky-server.iml" />
-      <module fileurl="file://$PROJECT_DIR$/sky-take-out/sky-take-out.iml" filepath="$PROJECT_DIR$/sky-take-out/sky-take-out.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/sky_take_out.iml" filepath="$PROJECT_DIR$/.idea/sky_take_out.iml" />
     </modules>
   </component>

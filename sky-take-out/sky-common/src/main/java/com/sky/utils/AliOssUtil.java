@@ -18,7 +18,8 @@ public class AliOssUtil {
     private String accessKeyId;
     private String accessKeySecret;
     private String bucketName;
-
+//    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
+//            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
     /**
      * 文件上传
      *
