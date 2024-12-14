@@ -12,10 +12,10 @@ sky:
 
   alioss:
     endpoint: oss-cn-hangzhou.aliyuncs.com
-    access-key-id: LTAI5tFdP77XDjh5x2xyMQqQ
-    access-key-secret: 9RbLWG0vp7pa17JdmQH7U16FXWGHnK
+    access-key-id: 
+    access-key-secret: 
     bucket-name: gyq-gulimail
   wechat:
-    appid: wx69b98f386f85e020
-    secret: 3bb4bce3133c3c22e02e2785d6c62dba
+    appid: 
+    secret: 
 
