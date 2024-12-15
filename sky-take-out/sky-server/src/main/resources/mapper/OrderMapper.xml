@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sky.mapper.OrderMapper">
+
+
+    <insert id="insert" parameterType="Orders" useGeneratedKeys="true" keyProperty="id">
+        insert into orders
+            (number,status,user_id,address_book,order_time,checkout_time,pay_method, amount,remark,phone,address,user_name,cancel_reason,rejection_reason,cancel_time,estimated_delivery_time,delivery_status,delivery_time,pack_amount,tableware_number,tableware_status)
+        values (
+            #{number},#{status},#{userId},#{addressBook},#{orderTime},#{checkoutTime},#{payMethod},#{amount},#{remark},#{phone},#{address},#{userName},#{cancelReason},#{rejectionReason},#{cancelTime},#{estimatedDeliveryTime},#{deliveryStatus},#{deliveryTime},#{packAmount},#{tablewareNumber},#{tablewareStatus}
+        )
+    </insert>
+
+<!--    <update id="update">-->
+<!--        update dish-->
+<!--        <set>-->
+<!--            <if test="name !=null">name=#{name}</if>-->
+<!--            <if test="categoryId !=null">category_id=#{categoryId}</if>-->
+<!--            <if test="price !=null">price=#{price}</if>-->
+<!--            <if test="image !=null">image=#{image}</if>-->
+<!--            <if test="description !=null">description=#{description}</if>-->
+<!--            <if test="status !=null">status=#{status}</if>-->
+<!--            <if test="updateTime !=null">updateTime=#{updateTime}</if>-->
+<!--            <if test="updateUser !=null">updateUser=#{updateUser}</if>-->
+<!--        </set>-->
+<!--        where id =#{id}-->
+<!--    </update>-->
+
+<!--    <delete id="deleteByIds">-->
+<!--        delete from dish where id in-->
+<!--        <foreach collection="ids" separator="," item="id" open="(" close=")">-->
+<!--             #{id}-->
+<!--        </foreach>-->
+<!--    </delete>-->
+
+
+
+
+</mapper>
