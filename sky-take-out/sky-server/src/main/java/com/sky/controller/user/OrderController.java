@@ -51,7 +51,7 @@ public class OrderController {
 
 
     /**
-     * 支付成功
+     * 支历史订单查询
      * @param
      */
     @GetMapping("/historyOrders")
@@ -62,10 +62,43 @@ public class OrderController {
 
     }
 
+    /**
+     * 订单详情查询
+     * @param id
+     * @return
+     */
     @GetMapping("/orderDetail/{id}")
     @ApiOperation("订单详情查询")
     public Result<OrderVO> details(@PathVariable("id") Long id){
         OrderVO orderVO = orderService.details(id);
         return Result.success(orderVO);
+    }
+
+
+    /**
+     * 取消订单
+     * @param id
+     * @return
+     * @throws Exception
+     */
+    @PutMapping("/cancel/{id}")
+    @ApiOperation("取消订单")
+    public Result cancel(@PathVariable("id") Long id) throws Exception {
+        orderService.userCancelById(id);
+        return Result.success();
+    }
+
+    /**
+     * 用户再来一单
+     * 再来一单就是将原订单中的商品重新加入到购物车中
+     * @param id
+     * @return
+     * @throws Exception
+     */
+    @PutMapping("/repetition/{id}")
+    @ApiOperation("用户再来一单")
+    public Result repetition(@PathVariable("id") Long id) throws Exception {
+        orderService.repetition(id);
+        return Result.success();
     }
 }

@@ -33,6 +33,7 @@ import java.sql.Array;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * @Author:guoyaqi
@@ -220,5 +221,79 @@ public class OrderServiceImpl implements OrderService {
         BeanUtils.copyProperties(orders,orderVO);
         orderVO.setOrderDetailList(detailList);
         return orderVO;
+    }
+
+    /**
+     * 取消订单
+     * @param id
+     */
+    public void userCancelById(Long id) throws Exception {
+        // 根据id查询订单
+        Orders ordersOB = orderMapper.getById(id);
+
+        if (ordersOB==null){
+            throw new OrderBusinessException(MessageConstant.ORDER_NOT_FOUND);
+        }
+
+        // 判断订单状态
+        Integer status = ordersOB.getStatus();
+        if (status>2){
+            throw new OrderBusinessException(MessageConstant.ORDER_STATUS_ERROR);
+        }
+
+        Orders orders = new Orders();
+        orders.setId(ordersOB.getId());
+
+        // 订单处于待接单状态下取消，需要进行退款
+        if (status.equals(Orders.TO_BE_CONFIRMED)){
+            //调用微信接口退款
+            weChatPayUtil.refund(
+                    ordersOB.getNumber(), //商户订单号
+                    ordersOB.getNumber(), //商户退款单号
+                    new BigDecimal(0.01),//退款金额，单位 元
+                    new BigDecimal(0.01));//原订单金额
+
+            orders.setPayStatus(Orders.REFUND);
+        }
+
+        //更新订单状态
+        orders.setStatus(Orders.CANCELLED);
+        orders.setCancelReason("用户取消");
+        orders.setOrderTime(LocalDateTime.now());
+        orderMapper.update(orders);
+
+
+    }
+
+    /**
+     * 用户再来一单
+     * @param id
+     */
+    public void repetition(Long id) {
+        Long userId = BaseContext.getCurrentId();
+
+        List<OrderDetail> orderDetailList = orderDetailMapper.getByOrderId(id);
+
+        // 向订单明细表插入多条数据
+        List<ShoppingCart> shoppingCartList = orderDetailList.stream().map(x -> {
+            ShoppingCart shoppingCart = new ShoppingCart();
+            BeanUtils.copyProperties(x, shoppingCart, "id");
+            shoppingCart.setUserId(userId);
+            shoppingCart.setCreateTime(LocalDateTime.now());
+            return shoppingCart;
+        }).collect(Collectors.toList());
+
+        // 将购物车对象批量添加到数据库
+        shoppingCartMapper.insertBatch(shoppingCartList);
+
+    }
+
+    /**
+     * 订单搜素
+     * @param ordersPageQueryDTO
+     * @return
+     */
+    public PageResult conditionSearch(OrdersPageQueryDTO ordersPageQueryDTO) {
+        return null;
     }
 }
