@@ -16,6 +16,6 @@ sky:
     access-key-secret: 
     bucket-name: gyq-gulimail
   wechat:
-    appid: 
-    secret: 
+    appid: wx69b98f386f85e020
+    secret: 8d2f3e39132b6676cab0b17ec7fa666c
 
