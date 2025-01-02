@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletResponse;
 import javax.validation.constraints.Size;
 import java.time.LocalDate;
 
@@ -95,5 +96,15 @@ public class ReportController {
     ){
 
         return Result.success(reportService.getSalesTop10(begin,end));
+    }
+
+    /**
+     * 导入运营数据
+     * @param response
+     */
+    @GetMapping("/export")
+    @ApiOperation("导出运营数据")
+    public void export(HttpServletResponse response ){
+        reportService.exportBusinessData(response);
     }
 }
