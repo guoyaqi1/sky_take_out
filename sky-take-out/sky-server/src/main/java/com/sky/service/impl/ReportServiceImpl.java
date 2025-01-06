@@ -216,7 +216,7 @@ public class ReportServiceImpl implements ReportService {
         List<String> numbers = salesTop.stream().map(GoodsSalesDTO::getName).collect(Collectors.toList());
         String numbersList = StringUtils.join(numbers, ",");
 
-
+ 
         return SalesTop10ReportVO.builder()
                 .nameList(nameList)
                 .numberList(numbersList)
